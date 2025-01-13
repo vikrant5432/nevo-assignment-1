@@ -1,0 +1,104 @@
+<div class="opportunities-container">
+  <h2>Arbitrage Opportunities</h2>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Scanning for arbitrage opportunities...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="error-state">
+    <div class="error-icon">⚠️</div>
+    <p>{{ error }}</p>
+    <button (click)="loadOpportunities()" class="retry-button">
+      Try Again
+    </button>
+  </div>
+
+  <!-- No Opportunities State -->
+  <div
+    *ngIf="!loading && !error && opportunities.length === 0"
+    class="no-data-state"
+  >
+    <div class="no-data-content">
+      <div class="info-icon">ℹ️</div>
+      <h3>No Profitable Opportunities</h3>
+      <p>Currently monitoring:</p>
+      <div class="monitored-pairs">
+        <span class="pair-tag">BTC/USDC</span>
+        <span class="pair-tag">ETH/USDC</span>
+        <span class="pair-tag">SOL/USDC</span>
+      </div>
+      <p class="last-updated">
+        Last scan: {{ lastScanTime | date : "medium" }}
+      </p>
+      <p class="next-scan">Next scan in: {{ nextScanCountdown }} seconds</p>
+    </div>
+  </div>
+
+  <!-- Data Display -->
+  <div
+    *ngIf="!loading && !error && opportunities.length > 0"
+    class="opportunities-list"
+  >
+    <!-- No Data State -->
+    <div *ngIf="opportunities.length === 0" class="no-data">
+      <p>No profitable opportunities found at the moment</p>
+    </div>
+
+    <!-- Opportunities Cards -->
+    <div *ngFor="let opp of opportunities" class="opportunity-card">
+      <div class="card-header">
+        <h3>{{ opp.symbol }}/USDC</h3>
+        <span class="timestamp">
+          {{ opp.timestamp | date : "short" }}
+        </span>
+      </div>
+
+      <div class="price-info">
+        <div class="price-item">
+          <span class="label">Binance:</span>
+          <span class="value">{{ opp.binancePrice | number : "1.2-6" }}</span>
+        </div>
+        <div class="price-item">
+          <span class="label">Solana:</span>
+          <span class="value">{{ opp.solanaPrice | number : "1.2-6" }}</span>
+        </div>
+      </div>
+
+      <div class="profit-info">
+        <div
+          class="profit-amount"
+          [ngClass]="{ positive: opp.profitAmount > 0 }"
+        >
+          {{ opp.profitAmount | currency : "USD" : "symbol" : "1.2-2" }}
+          ({{ opp.profitPercentage | number : "1.2-2" }}%)
+        </div>
+        <div class="direction">
+          {{ opp.direction | titlecase }}
+        </div>
+      </div>
+
+      <div class="additional-info">
+        <div class="fees">
+          <div>
+            Binance Fee:
+            {{ opp.fees.binance | currency : "USD" : "symbol" : "1.4-4" }}
+          </div>
+          <div>
+            Solana Fee:
+            {{ opp.fees.solana | currency : "USD" : "symbol" : "1.4-4" }}
+          </div>
+        </div>
+        <div class="volume">
+          Volume:
+          {{ opp.tradingVolume | currency : "USD" : "symbol" : "1.0-0" }}
+        </div>
+        <div class="slippage">
+          Max Slippage: {{ opp.slippage | percent : "1.1-1" }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

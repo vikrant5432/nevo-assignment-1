@@ -1,0 +1,207 @@
+/* src/app/features/arbitrage/components/opportunities-list/opportunities-list.component.css */
+.opportunities-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.opportunities-container h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.loading-state {
+  text-align: center;
+  padding: 40px;
+}
+
+.loading-state .spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #09f;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+.error-state {
+  text-align: center;
+  color: #dc3545;
+  padding: 20px;
+}
+
+.no-data {
+  text-align: center;
+  color: #666;
+  padding: 40px;
+}
+
+.opportunity-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.opportunity-card:hover {
+  transform: translateY(-2px);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.card-header h3 {
+  margin: 0;
+  color: #333;
+}
+
+.card-header .timestamp {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.price-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.price-info .label {
+  color: #666;
+  margin-right: 8px;
+}
+
+.price-info .value {
+  font-weight: 500;
+}
+
+.profit-info {
+  text-align: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+
+.profit-info .profit-amount {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #28a745;
+}
+
+.profit-info .profit-amount.positive {
+  color: #28a745;
+}
+
+.profit-info .direction {
+  color: #666;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+.additional-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.additional-info .fees,
+.additional-info .volume,
+.additional-info .slippage {
+  padding: 8px;
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .price-info {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .additional-info {
+    grid-template-columns: 1fr;
+  }
+}
+
+.no-data-state {
+  text-align: center;
+  padding: 40px 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.no-data-content {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.info-icon {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.no-data-state h3 {
+  color: #343a40;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.monitored-pairs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 15px 0;
+  flex-wrap: wrap;
+}
+
+.pair-tag {
+  background: #e9ecef;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #495057;
+}
+
+.last-updated {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin-top: 20px;
+}
+
+.next-scan {
+  color: #0d6efd;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.retry-button {
+  background: #0d6efd;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.retry-button:hover {
+  background: #0b5ed7;
+}
